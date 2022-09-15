@@ -1,5 +1,4 @@
-
-  setRefClass("linreg", fields=list())
+setRefClass("linreg", fields=list())
   
   linreg<-function(formula,data){
     x<-model.matrix(formula, data=data)
@@ -18,4 +17,4 @@
     return(t_value)
   
   }
-  
+
