@@ -1,0 +1,12 @@
+Package: Lab4
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2022-09-15
+Author: Yi Hung Chen, Kyriakos Papadopoulos
+Maintainer: Yi Hung Chen<yihch883@student.liu.se> ,Kyriakos Papadopoulos<kyrpa853@student.liu.se>
+Description: A linear regression package in R
+License: GPL-3 + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.2.1
+Depends: R (>= 3.5.0)
