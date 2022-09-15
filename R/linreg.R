@@ -1,0 +1,8 @@
+
+
+  linreg<-function(formula,data){
+  
+  
+  
+  
+  }
