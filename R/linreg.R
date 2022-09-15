@@ -1,6 +1,7 @@
-setRefClass("linreg", fields=list())
-  
-  
+# Defining the class LinReg  
+LinReg <- setRefClass("LinReg", fields = list(t_values = "ANY", p_values = "ANY"))
+
+
 linreg<-function(formula,data){
   
     # Finding x and y
@@ -28,10 +29,11 @@ linreg<-function(formula,data){
     the_variance_of_the_regression_coefficients <- drop(the_residual_variance) * solve((t(x)%*%x))
     
     # Finding the t values for each coefficient
-    t_value <- regressions_coefficients / sqrt(diag(the_variance_of_the_regression_coefficients))
-    p_value <- pt(regressions_coefficients,the_degrees_of_freedom)
+    t_values <- regressions_coefficients / sqrt(diag(the_variance_of_the_regression_coefficients))
+    p_values <- pt(regressions_coefficients,the_degrees_of_freedom)
     
-    return(t_value)
-  
-  } 
+    object_test <- LinReg(t_values = t_values, p_values = p_values)
+    
+    return(object_test)
+} 
 
