@@ -38,7 +38,7 @@ linreg<-function(formula,data){
     
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(diag(the_variance_of_the_regression_coefficients))
-    p_values <- pt(regressions_coefficients,the_degrees_of_freedom)
+    p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
     linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients)
     
     return(linreg_object)
