@@ -34,10 +34,10 @@ linreg<-function(formula,data){
     the_residual_variance <- t(the_residuals) %*% the_residuals / the_degrees_of_freedom
     
     # Finding the variance of the regression coefficients
-    the_variance_of_the_regression_coefficients <- drop(the_residual_variance) * solve((t(x)%*%x))
+    the_variance_of_the_regression_coefficients <- diag(drop(the_residual_variance) * solve((t(x)%*%x))) #use diag to eliminate unecessory covariances
     
     # Finding the t values for each coefficient
-    t_values <- regressions_coefficients / sqrt(diag(the_variance_of_the_regression_coefficients))
+    t_values <- regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
     p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
     linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients)
     
