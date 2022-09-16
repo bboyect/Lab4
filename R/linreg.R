@@ -1,5 +1,5 @@
 # Defining the class LinReg  
-LinReg <- setRefClass("LinReg", fields = list(t_values = "ANY", p_values = "ANY"))
+LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix"))
 
 
 linreg<-function(formula,data){
@@ -31,9 +31,8 @@ linreg<-function(formula,data){
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(diag(the_variance_of_the_regression_coefficients))
     p_values <- pt(regressions_coefficients,the_degrees_of_freedom)
+    linreg_object <- LinReg(t_values = t_values, p_values = p_values)
     
-    object_test <- LinReg(t_values = t_values, p_values = p_values)
-    
-    return(object_test)
+    return(linreg_object)
 } 
 
