@@ -35,7 +35,7 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         
                         medians_data <- data.frame(x = c(first_species_x,second_species_x,third_species_x) , y = c(first_species_y, second_species_y, third_species_y))
                         
-                        return( first_species_y)
+                        return( medians_data)
                       },
                       
                       plot = function(){
