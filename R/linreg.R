@@ -28,21 +28,23 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         second_species_x <- median(fitted_values[51:100])
                         third_species_x <- median(fitted_values[101:150])
                         
-                        first_species_y <- rep(median(sqrt(abs(the_residual_variance[1:50]))), 50)
-                        second_species_y <- rep(median(sqrt(abs(the_residual_variance[51:100]))), 50)
-                        third_species_y <- rep(median(sqrt(abs(the_residual_variance[101:150]))), 50)
+                        sqrt_standardized_residuals <- sqrt(abs(the_residuals / sd(the_residuals)))
+                        first_species_y <- rep(median(sqrt_standardized_residuals[1:50]), 50)
+                        second_species_y <- rep(median(sqrt_standardized_residuals[51:100]), 50)
+                        third_species_y <- rep(median(sqrt_standardized_residuals[101:150]), 50)
                         
                         medians_data <- data.frame(x = c(first_species_x,second_species_x,third_species_x) , y = c(first_species_y, second_species_y, third_species_y))
                         
-                        return( medians_data)
+                        return( first_species_y)
                       },
                       
                       plot = function(){
                         median_values_x <- medians_of_resdiuals()[1]
                         median_values_y <- medians_of_resdiuals()[2]
                         median_values_y2 <- medians_of_standerdized_residuals()[2]
+                        sqrt_standardized_residuals <- sqrt(abs(the_residuals / sd(the_residuals)))
                         test <- sqrt(abs(the_residual_variance))
-                        testdata <- data.frame(fitted_values, the_residuals, test, median_values_x, median_values_y, median_values_y2)
+                        testdata <- data.frame(fitted_values, the_residuals, test, median_values_x, median_values_y, median_values_y2, sqrt_standardized_residuals)
                         
                         plot1 <- ggplot2::ggplot() + 
                           ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= the_residuals)) +
@@ -50,11 +52,11 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         
                         
                         plot2 <- ggplot2::ggplot() + 
-                          ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= test)) 
-                          #ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y2)))
+                          ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(sqrt_standardized_residuals))) +
+                          ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y2)))
                         
 
-                        return(the_residual_variance)
+                        return(plot2)
                       },
                       
                       resid = function(){
