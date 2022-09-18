@@ -2,8 +2,6 @@
 LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix",the_residuals = "matrix", fitted_values = "matrix"),
                       methods = list(
                       print = function(){
-                        names <- rownames(regressions_coefficients)
-                        name <- colnames(regressions_coefficients)
                         output <- drop(regressions_coefficients) 
                         print(output)
                       },
@@ -14,6 +12,10 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                       
                       pred = function(){
                         return(fitted_values)
+                      },
+                      
+                      coef = function(){
+                        return(drop(regressions_coefficients))
                       }
                       
                       
