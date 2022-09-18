@@ -9,6 +9,29 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         print(output)
                       },
                       
+                      medians = function(){
+                        first_species_x <- median(fitted_values[1:50])
+                        second_species_x <- median(fitted_values[51:100])
+                        third_species_x <- median(fitted_values[101:150])
+                        
+                        first_species_y <- median(the_residuals[1:50])
+                        second_species_y <- median(the_residuals[51:100])
+                        third_species_y <- median(the_residuals[101:150])
+                        
+                        
+                        testoutput <-c(first_species_y, second_species_y, third_species_y)
+                        
+                        return(testoutput)
+                      },
+                      
+                      plot = function(){
+                        plot1 <- ggplot2::ggplot(data.frame(fitted_values, the_residuals), ggplot2::aes(y=the_residuals, x=fitted_values))+ ggplot2::geom_dotplot(shape=23, size=2, colour="blue", fill="yellow")
+                        # ggplot2::ggplot(x = fitted_values, y = the_residuals) +
+                        # ggplot2::geom_dotplot()
+                        
+                        return(plot1)
+                      },
+                      
                       resid = function(){
                         return(the_residuals)
                       },
