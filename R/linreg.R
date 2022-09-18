@@ -1,12 +1,21 @@
 # Defining the class LinReg  
-LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix"),
+LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix",the_residuals = "matrix", fitted_values = "matrix"),
                       methods = list(
                       print = function(){
                         names <- rownames(regressions_coefficients)
                         name <- colnames(regressions_coefficients)
                         output <- drop(regressions_coefficients) 
                         print(output)
+                      },
+                      
+                      resid = function(){
+                        return(the_residuals)
+                      },
+                      
+                      pred = function(){
+                        return(fitted_values)
                       }
+                      
                       
                       
 ))
@@ -41,7 +50,7 @@ linreg<-function(formula,data){
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
     p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
-    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients)
+    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values)
     
     return(linreg_object)
 } 
