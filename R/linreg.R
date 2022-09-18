@@ -1,20 +1,22 @@
 # Defining the class LinReg  
 LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix"),
                       methods = list(
-                      show = function(){
+                      print = function(){
                         names <- rownames(regressions_coefficients)
                         name <- colnames(regressions_coefficients)
-                        output <- list(regressions_coefficients) 
-                        print("hey eric")
-                      }  
+                        output <- drop(regressions_coefficients) 
+                        print(output)
+                      }
+                      
+                      
 ))
 
 
 linreg<-function(formula,data){
   
     # Finding x and y
-    x<-model.matrix(formula, data=data)
-    y<-as.matrix(data[all.vars(formula)[1]]) #as.vector does not work
+    x <- model.matrix(formula, data=data)
+    y <- as.matrix(data[all.vars(formula)[1]]) #as.vector does not work
     
     # Finding regressions coefficients
     regressions_coefficients <- solve( t(x)%*%x) %*% t(x)%*%y
