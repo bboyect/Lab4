@@ -2,34 +2,59 @@
 #' @import ggplot2
 
 # Defining the class LinReg  
-LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix",the_residuals = "matrix", fitted_values = "matrix"),
+LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix",the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix"),
                       methods = list(
                       print = function(){
                         output <- drop(regressions_coefficients) 
                         print(output)
                       },
                       
-                      medians = function(){
+                      medians_of_resdiuals = function(){
                         first_species_x <- median(fitted_values[1:50])
                         second_species_x <- median(fitted_values[51:100])
                         third_species_x <- median(fitted_values[101:150])
                         
-                        first_species_y <- median(the_residuals[1:50])
-                        second_species_y <- median(the_residuals[51:100])
-                        third_species_y <- median(the_residuals[101:150])
+                        first_species_y <- rep(median(the_residuals[1:50]), 50)
+                        second_species_y <- rep(median(the_residuals[51:100]), 50)
+                        third_species_y <- rep(median(the_residuals[101:150]), 50)
+
+                        medians_data <- data.frame(x = c(first_species_x,second_species_x,third_species_x) , y = c(first_species_y, second_species_y, third_species_y))
+
+                        return( medians_data)
+                      },
+                      
+                      medians_of_standerdized_residuals = function(){
+                        first_species_x <- median(fitted_values[1:50])
+                        second_species_x <- median(fitted_values[51:100])
+                        third_species_x <- median(fitted_values[101:150])
                         
+                        first_species_y <- rep(median(sqrt(abs(the_residual_variance[1:50]))), 50)
+                        second_species_y <- rep(median(sqrt(abs(the_residual_variance[51:100]))), 50)
+                        third_species_y <- rep(median(sqrt(abs(the_residual_variance[101:150]))), 50)
                         
-                        testoutput <-c(first_species_y, second_species_y, third_species_y)
+                        medians_data <- data.frame(x = c(first_species_x,second_species_x,third_species_x) , y = c(first_species_y, second_species_y, third_species_y))
                         
-                        return(testoutput)
+                        return( medians_data)
                       },
                       
                       plot = function(){
-                        plot1 <- ggplot2::ggplot(data.frame(fitted_values, the_residuals), ggplot2::aes(y=the_residuals, x=fitted_values))+ ggplot2::geom_dotplot(shape=23, size=2, colour="blue", fill="yellow")
-                        # ggplot2::ggplot(x = fitted_values, y = the_residuals) +
-                        # ggplot2::geom_dotplot()
+                        median_values_x <- medians_of_resdiuals()[1]
+                        median_values_y <- medians_of_resdiuals()[2]
+                        median_values_y2 <- medians_of_standerdized_residuals()[2]
+                        test <- sqrt(abs(the_residual_variance))
+                        testdata <- data.frame(fitted_values, the_residuals, test, median_values_x, median_values_y, median_values_y2)
                         
-                        return(plot1)
+                        plot1 <- ggplot2::ggplot() + 
+                          ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= the_residuals)) +
+                          ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y)))
+                        
+                        
+                        plot2 <- ggplot2::ggplot() + 
+                          ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= test)) 
+                          #ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y2)))
+                        
+
+                        return(the_residual_variance)
                       },
                       
                       resid = function(){
@@ -78,7 +103,7 @@ linreg<-function(formula,data){
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
     p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
-    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values)
+    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values, the_residual_variance = the_residual_variance)
     
     return(linreg_object)
 } 
