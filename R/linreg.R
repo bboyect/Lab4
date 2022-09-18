@@ -1,3 +1,6 @@
+#' 
+#' @import ggplot2
+
 # Defining the class LinReg  
 LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix",the_residuals = "matrix", fitted_values = "matrix"),
                       methods = list(
