@@ -2,8 +2,7 @@
 #' @import ggplot2
 
 # Defining the class LinReg  
-LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix", 
-                                              the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix", the_variance_of_the_regression_coefficients = "numeric", standard_error = "numeric", sigma = "matrix" , the_degrees_of_freedom = "numeric"),
+LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix", the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix", the_variance_of_the_regression_coefficients = "numeric", standard_error = "numeric", sigma = "matrix" , the_degrees_of_freedom = "numeric"),
                       methods = list(
                       show = function(){
                         output <- drop(regressions_coefficients) 
@@ -124,8 +123,7 @@ linreg<-function(formula,data){
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
     p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
-    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values, 
-                              the_residual_variance = the_residual_variance, the_variance_of_the_regression_coefficients = the_variance_of_the_regression_coefficients , standard_error = standard_error ,sigma = sigma , the_degrees_of_freedom = the_degrees_of_freedom)
+    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values, the_residual_variance = the_residual_variance, the_variance_of_the_regression_coefficients = the_variance_of_the_regression_coefficients , standard_error = standard_error ,sigma = sigma , the_degrees_of_freedom = the_degrees_of_freedom)
     
     return(linreg_object)
 } 
