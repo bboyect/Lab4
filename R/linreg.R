@@ -48,16 +48,23 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         
                         plot1 <- ggplot2::ggplot() + 
                           ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= the_residuals)) +
-                          ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y)))
+                          ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y)), color = "red")
                         
+                        plot1 <- plot1 + ggplot2::labs(title = "Residuals vs Fitted") +
+                          ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) + ggplot2::ylab("Residuals") + ggplot2::xlab("Fitted values")
                         
                         plot2 <- ggplot2::ggplot() + 
                           ggplot2::geom_point(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(sqrt_standardized_residuals))) +
-                          ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y2)))
+                          ggplot2::geom_line(data=testdata, mapping = ggplot2::aes(x=fitted_values, y= unlist(median_values_y2)), color = "red")
                         
-
-                        return(plot2)
+                        plot2 <- plot2 + ggplot2::labs(title = "Scale-Location") +
+                          ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) + ggplot2::ylab( expression(paste(sqrt("Standerdized residuals")))) + ggplot2::xlab("Fitted values")
+                        
+                        plot_output <- list(plot1, plot2)
+                        
+                        return(plot_output)
                       },
+                      
                       
                       resid = function(){
                         return(the_residuals)
