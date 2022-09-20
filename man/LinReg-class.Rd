@@ -10,11 +10,6 @@
 
 \item{data, }{The data, iris}
 }
-\value{
-Linear regression for Iris
-
-empty
-}
 \description{
 Run Linear Regression
 }
@@ -54,4 +49,9 @@ Run Linear Regression
 \item{\code{p_values,}}{p_values}
 }}
 
+\section{Methods}{
+
+\describe{
+\item{\code{print()}}{Prints information about model}
+}}
 
