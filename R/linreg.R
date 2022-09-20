@@ -83,7 +83,7 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         summary_output <- data.frame(regressions_coefficients, standard_error, t_values, p_values)
                         colnames(summary_output) <- c("regressions_coefficients", "standard_error", "t_values", "p_values")
                         print(summary_output)
-                        cat("estimate of σ", sigma, "\n")
+                        cat("estimate of sigma", sigma, "\n")
                         cat("Degree of freedom", the_degrees_of_freedom)
                       }
                       
