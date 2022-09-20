@@ -2,7 +2,8 @@
 #' @import ggplot2
 
 # Defining the class LinReg  
-LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix",the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix"),
+LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix", 
+                                              the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix", the_variance_of_the_regression_coefficients = "numeric", standard_error = "numeric"),
                       methods = list(
                       print = function(){
                         output <- drop(regressions_coefficients) 
@@ -78,6 +79,10 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                         return(drop(regressions_coefficients))
                       }
                       
+                      summary = function(){
+                        
+                        
+                      }
                       
                       
 ))
@@ -109,10 +114,13 @@ linreg<-function(formula,data){
     # Finding the variance of the regression coefficients
     the_variance_of_the_regression_coefficients <- diag(drop(the_residual_variance) * solve((t(x)%*%x))) #use diag to eliminate unecessory covariances
     
+    standard_error <- sqrt(the_variance_of_the_regression_coefficients)
+    
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
     p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
-    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values, the_residual_variance = the_residual_variance)
+    linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values, 
+                              the_residual_variance = the_residual_variance, the_variance_of_the_regression_coefficients = the_variance_of_the_regression_coefficients , standard_error = standard_error)
     
     return(linreg_object)
 } 
