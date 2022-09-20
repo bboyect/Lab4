@@ -3,9 +3,9 @@
 
 # Defining the class LinReg  
 LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "matrix", regressions_coefficients = "matrix", 
-                                              the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix", the_variance_of_the_regression_coefficients = "numeric", standard_error = "numeric"),
+                                              the_residuals = "matrix", fitted_values = "matrix", the_residual_variance = "matrix", the_variance_of_the_regression_coefficients = "numeric", standard_error = "numeric", sigma = "matrix" , the_degrees_of_freedom = "numeric"),
                       methods = list(
-                      print = function(){
+                      show = function(){
                         output <- drop(regressions_coefficients) 
                         print(output)
                       },
@@ -77,11 +77,15 @@ LinReg <- setRefClass("LinReg", fields = list(t_values = "matrix", p_values = "m
                       
                       coef = function(){
                         return(drop(regressions_coefficients))
-                      }
+                      },
                       
                       summary = function(){
                         
-                        
+                        summary_output <- data.frame(regressions_coefficients, standard_error, t_values, p_values)
+                        colnames(summary_output) <- c("regressions_coefficients", "standard_error", "t_values", "p_values")
+                        print(summary_output)
+                        cat("estimate of σ", sigma, "\n")
+                        cat("Degree of freedom", the_degrees_of_freedom)
                       }
                       
                       
@@ -115,12 +119,13 @@ linreg<-function(formula,data){
     the_variance_of_the_regression_coefficients <- diag(drop(the_residual_variance) * solve((t(x)%*%x))) #use diag to eliminate unecessory covariances
     
     standard_error <- sqrt(the_variance_of_the_regression_coefficients)
+    sigma <- sqrt(the_residual_variance)
     
     # Finding the t values for each coefficient
     t_values <- regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
     p_values <- 2*pt(t_values,the_degrees_of_freedom, lower.tail = FALSE)
     linreg_object <- LinReg(t_values = t_values, p_values = p_values, regressions_coefficients = regressions_coefficients,the_residuals = the_residuals, fitted_values = fitted_values, 
-                              the_residual_variance = the_residual_variance, the_variance_of_the_regression_coefficients = the_variance_of_the_regression_coefficients , standard_error = standard_error)
+                              the_residual_variance = the_residual_variance, the_variance_of_the_regression_coefficients = the_variance_of_the_regression_coefficients , standard_error = standard_error ,sigma = sigma , the_degrees_of_freedom = the_degrees_of_freedom)
     
     return(linreg_object)
 } 
