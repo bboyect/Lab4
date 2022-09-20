@@ -5,18 +5,53 @@
 \alias{LinReg-class}
 \alias{LinReg}
 \title{Linear Regression}
-\usage{
-linreg(Petal.Length~Species, data = iris)
-}
 \arguments{
-\item{formula}{The formula}
+\item{formula, }{The formula}
 
-\item{data}{The data, iris}
+\item{data, }{The data, iris}
 }
 \value{
 Linear regression for Iris
+
+empty
 }
 \description{
 Run Linear Regression
 }
+\section{Fields}{
+
+\describe{
+\item{\code{formula,}}{"formula"}
+
+\item{\code{data,}}{"data.frame"}
+
+\item{\code{x,}}{= "matrix"}
+
+\item{\code{y,}}{= "matrix"}
+
+\item{\code{regressions_coefficients,}}{= "matrix"}
+
+\item{\code{fitted_values,}}{= "matrix"}
+
+\item{\code{the_residuals,}}{= "matrix"}
+
+\item{\code{n,}}{= "numeric"}
+
+\item{\code{p,}}{= "numeric"}
+
+\item{\code{the_degrees_of_freedom,}}{= "numeric"}
+
+\item{\code{the_residual_variance,}}{= "matrix"}
+
+\item{\code{the_variance_of_the_regression_coefficients,}}{= "numeric"}
+
+\item{\code{standard_error,}}{= "numeric"}
+
+\item{\code{sigma1,}}{= "matrix"}
+
+\item{\code{t_values,}}{= "matrix"}
+
+\item{\code{p_values,}}{= "matrix"}
+}}
+
 
