@@ -4,30 +4,30 @@
 #'  
 #' @param formula, The formula
 #' @param data, The data, iris  
-#' @field formula, "formula"
-#' @field data, "data.frame"
-#' @field x, = "matrix"
-#' @field y, = "matrix"
-#' @field regressions_coefficients, = "matrix"
-#' @field fitted_values, = "matrix"
-#' @field the_residuals, = "matrix"
-#' @field n, = "numeric"
-#' @field p, = "numeric"
-#' @field the_degrees_of_freedom, = "numeric"
-#' @field the_residual_variance, = "matrix"
-#' @field the_variance_of_the_regression_coefficients, = "numeric"
-#' @field standard_error, = "numeric"
-#' @field sigma1, = "matrix"
-#' @field t_values, = "matrix"
-#' @field p_values, = "matrix"
+#' @field formula, formula
+#' @field data, data
+#' @field x, = x
+#' @field y, = y
+#' @field regressions_coefficients, regressions_coefficients
+#' @field fitted_values, = fitted_values
+#' @field the_residuals, = the_residuals
+#' @field n, n
+#' @field p, p
+#' @field the_degrees_of_freedom, the_degrees_of_freedom
+#' @field the_residual_variance, the_residual_variance
+#' @field the_variance_of_the_regression_coefficients, the_variance_of_the_regression_coefficients
+#' @field standard_error, standard_error
+#' @field sigma1, sigma1
+#' @field t_values, t_values
+#' @field p_values, p_values
 #' @return Linear regression for Iris
 #' @return empty
 #' @importFrom ggplot2 ggplot aes geom_point geom_line labs ylab xlab theme element_text
 #' @import methods
-#' @export LinReg
+#' @export linreg
 
 # Defining the class LinReg  
-LinReg <- setRefClass("LinReg", 
+linreg <- setRefClass("linreg", 
                       fields = list(formula="formula",
                                     data="data.frame",
                                     x = "matrix",
@@ -79,9 +79,8 @@ LinReg <- setRefClass("LinReg",
                         # Finding the t values for each coefficient
                         t_values <<-regressions_coefficients / sqrt(the_variance_of_the_regression_coefficients)
                         p_values <<-2 * pt(t_values, the_degrees_of_freedom, lower.tail = FALSE)
-
+                        
                       },
-                      
 
                       show = function(){
                         output <- drop(regressions_coefficients)
@@ -161,7 +160,7 @@ LinReg <- setRefClass("LinReg",
 
                         summary_output <- data.frame(regressions_coefficients, standard_error, t_values, p_values)
                         colnames(summary_output) <- c("regressions_coefficients", "standard_error", "t_values", "p_values")
-                        print(summary_output)
+                        #print(summary_output)
                         cat("estimate of   sigma",  sigma1, "\n")
                         cat("Degree of freedom", the_degrees_of_freedom)
                       }
