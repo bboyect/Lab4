@@ -6,7 +6,7 @@
 <img alt="Version" src="https://img.shields.io/amo/v/W?label=Version&logo=R&logoColor=yellow"></a>
 
 ### Lab Team
-* Yi-Hung Chen [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/kyriakos-papadopoulos-0295461a0/)
+* Yi-Hung Chen [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn]((https://www.linkedin.com/in/yi-hung-chen-7aa54120a/)
 * Kyriakos Papadopoulos [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/kyriakos-papadopoulos-0295461a0/)
 
 ### GitHub Usernames
