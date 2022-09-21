@@ -90,7 +90,7 @@ linreg <- setRefClass("linreg",
                         print = function(){
               
                           cat(paste("linreg(formula = ",  formula_name, ", data = ", data_name , ")", sep = ""))
-                          print_mask(drop(regressions_coefficients))
+                          print.data.frame(drop(regressions_coefficients))
                         
                           },
                         
@@ -168,16 +168,12 @@ linreg <- setRefClass("linreg",
                     
                           
                           summary_output <- setNames(as.data.frame(cbind(regressions_coefficients,as.matrix(standard_error),t_values, formatC(p_values, format = "e", digits = 5), p_stars(p_values))), c("Coefficients","Standard error","t_values", "p_values", ""))
-                          print_mask(summary_output)
+                          print.data.frame(summary_output)
                           cat(paste("\n\nResidual standard error: ", sigma1, " on ", the_degrees_of_freedom, " degrees of freedom: ", sep = ""))
                         }
                         
                       ))
 
-
-print_mask = function(x) {
-  print(x)
-}
 
 p_stars = function(p_values) {
   stars <- c()
