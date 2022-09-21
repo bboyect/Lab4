@@ -47,11 +47,10 @@ Run Linear Regression
 \item{\code{t_values,}}{t_values}
 
 \item{\code{p_values,}}{p_values}
+
+\item{\code{formula_name,}}{formula_name}
+
+\item{\code{data_name,}}{data_name}
 }}
 
-\section{Methods}{
-
-\describe{
-\item{\code{print()}}{Prints information about model}
-}}
 
