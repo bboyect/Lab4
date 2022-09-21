@@ -6,11 +6,11 @@
 #' @param data, The data, iris  
 #' @field formula, formula
 #' @field data, data
-#' @field x, = x
-#' @field y, = y
+#' @field x, x
+#' @field y, y
 #' @field regressions_coefficients, regressions_coefficients
-#' @field fitted_values, = fitted_values
-#' @field the_residuals, = the_residuals
+#' @field fitted_values, fitted_values
+#' @field the_residuals, the_residuals
 #' @field n, n
 #' @field p, p
 #' @field the_degrees_of_freedom, the_degrees_of_freedom
@@ -88,11 +88,11 @@ linreg <- setRefClass("linreg",
                         },
                         
                         print = function(){
-              
+                          
                           cat(paste("linreg(formula = ",  formula_name, ", data = ", data_name , ")", sep = ""))
-                          print.data.frame(drop(regressions_coefficients))
-                        
-                          },
+                          print_mask(drop(regressions_coefficients))
+                          
+                        },
                         
                         
                         medians_of_resdiuals = function(){
@@ -176,6 +176,9 @@ linreg <- setRefClass("linreg",
                         
                       ))
 
+print_mask = function(x) {
+  print(x)
+}
 
 p_stars = function(p_values) {
   stars <- c()

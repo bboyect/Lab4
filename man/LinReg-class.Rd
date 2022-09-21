@@ -20,15 +20,15 @@ Run Linear Regression
 
 \item{\code{data,}}{data}
 
-\item{\code{x,}}{= x}
+\item{\code{x,}}{x}
 
-\item{\code{y,}}{= y}
+\item{\code{y,}}{y}
 
 \item{\code{regressions_coefficients,}}{regressions_coefficients}
 
-\item{\code{fitted_values,}}{= fitted_values}
+\item{\code{fitted_values,}}{fitted_values}
 
-\item{\code{the_residuals,}}{= the_residuals}
+\item{\code{the_residuals,}}{the_residuals}
 
 \item{\code{n,}}{n}
 

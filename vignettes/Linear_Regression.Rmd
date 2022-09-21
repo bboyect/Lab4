@@ -1,0 +1,65 @@
+---
+title: "Linear_Regression"
+author: "Yi Hung Chen, Kyriakos Papadopoulos"
+date: "21/09/2022"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linear_Regression}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+### Description
+This package is used to conduct a simple regression analysis using iris dataset and some methods have been made to present stats from the linear regression model.
+
+## Created a linear regression model
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Lab4)
+mod_object <- linreg(Petal.Length~Species, data = iris)
+```
+
+### Print()
+```{r, eval=TRUE, include=TRUE}
+mod_object$print()
+```
+### Plot()
+```{r}
+list_of_plots = mod_object$plot()
+```
+
+- 1st plot
+```{r, eval=TRUE, include=TRUE}
+list_of_plots[1]
+```
+
+- 2nd plot
+```{r, eval=TRUE, include=TRUE}
+list_of_plots[2]
+```
+
+### resid()
+```{r, eval=TRUE, include=TRUE}
+mod_object$resid()[1:4]
+```
+
+### pred()
+```{r, eval=TRUE, include=TRUE, output.lines=4}
+mod_object$pred()[1:4]
+```
+
+### coef()
+```{r, eval=TRUE, include=TRUE}
+mod_object$coef()
+```
+
+### summary()
+```{r, eval=TRUE, include=TRUE}
+mod_object$summary()
+```

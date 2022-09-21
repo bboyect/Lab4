@@ -11,5 +11,8 @@ Encoding: UTF-8
 RoxygenNote: 7.2.1
 Depends: R (>= 3.5.0), ggplot2, methods
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr
