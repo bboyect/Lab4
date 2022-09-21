@@ -26,6 +26,7 @@ mod_object <- linreg(Petal.Length~Species, data = iris)
 ```
 
 ### Print()
+> *should print out the coefficients and coefficient names*
 ```{r, eval=TRUE, include=TRUE}
 mod_object$print()
 ```
@@ -45,21 +46,26 @@ list_of_plots[2]
 ```
 
 ### resid()
+> *Returns the vector of residuals*
 ```{r, eval=TRUE, include=TRUE}
 mod_object$resid()[1:4]
 ```
 
 ### pred()
+> *Returns the predicted values*
 ```{r, eval=TRUE, include=TRUE, output.lines=4}
 mod_object$pred()[1:4]
 ```
 
 ### coef()
+> *Returns the coefficients*
 ```{r, eval=TRUE, include=TRUE}
 mod_object$coef()
 ```
 
 ### summary()
+> *Presents the coefficients with their standard error, t-value and p-value as well as the estimate of ˆσ and the degrees
+of freedom in the model.*
 ```{r, eval=TRUE, include=TRUE}
 mod_object$summary()
 ```
