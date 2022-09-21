@@ -167,7 +167,9 @@ linreg <- setRefClass("linreg",
                         summary = function(){
                     
                           
-                          summary_output <- setNames(as.data.frame(cbind(regressions_coefficients,as.matrix(standard_error),t_values, formatC(p_values, format = "e", digits = 5), p_stars(p_values))), c("Coefficients","Standard error","t_values", "p_values", ""))
+                          summary_output <- as.data.frame(cbind(regressions_coefficients,as.matrix(standard_error),t_values, formatC(p_values, format = "e", digits = 5), p_stars(p_values)))
+                          colnames(summary_output) <-c("Coefficients","Standard error","t_values", "p_values", "")
+                          
                           print.data.frame(summary_output)
                           cat(paste("\n\nResidual standard error: ", sigma1, " on ", the_degrees_of_freedom, " degrees of freedom: ", sep = ""))
                         }
